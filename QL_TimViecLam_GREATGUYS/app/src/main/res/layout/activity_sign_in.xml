@@ -193,7 +193,6 @@
                 android:textSize="18dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:onClick="changeLayoutSignup"
                 android:id="@+id/btn_dang_ky"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

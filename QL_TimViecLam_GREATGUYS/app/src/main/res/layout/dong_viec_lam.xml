@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textviewTuyendung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Tuyển dụng"
+        android:textColor="#000"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textviewLuong"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textviewTuyendung"
+        android:layout_marginTop="5dp"
+        android:text="Lương"
+        android:textColor="#ff00"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/textviewTuyendung" />
+
+
+    <ImageView
+        android:id="@+id/imageviewHinh"
+        android:layout_below="@id/textviewLuong"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/textviewCty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_toRightOf="@+id/imageviewHinh"
+        android:text="Tên"
+        android:textColor="#000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textviewDiadiem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textviewCty"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imageviewHinh"
+        android:text="Địa điểm"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/textviewTinuutien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textviewDiadiem"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imageviewHinh"
+        android:text="Tin ưu tiên"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+</RelativeLayout>
