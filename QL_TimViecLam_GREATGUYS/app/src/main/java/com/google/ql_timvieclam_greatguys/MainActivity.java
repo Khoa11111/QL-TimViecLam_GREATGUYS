@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ListView lv;
     ArrayList<TinTuyenDung> arrayList;
     TuyenDungAdapter adapter;
+    //m
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
