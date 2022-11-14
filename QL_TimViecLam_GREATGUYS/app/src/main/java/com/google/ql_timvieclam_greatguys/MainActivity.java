@@ -1,5 +1,6 @@
 package com.google.ql_timvieclam_greatguys;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     TuyenDungAdapter adapter;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
+    AppCompatButton btnLogin, btnSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
         });
+
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_DangXuat:
+                        Intent iDangxuat = new Intent(MainActivity.this, SignIn.class);
+                        startActivity(iDangxuat);
+                }
+                return false;
+            }
+        });
+
 
         mList = findViewById(R.id.list);
         appList = new ArrayList<>();
@@ -83,5 +100,27 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(new TinTuyenDung("Cần tuyển tài xế", "11.000.000 - 15.000.000đ/ tháng", R.drawable.tai_xe_o_to, "Nguyễn C", "Hà Nội","7 ngày trước"));
         arrayList.add(new TinTuyenDung("Công ty X tuyển dụng", "40.000.000 - 50.000.000đ/ tháng", R.drawable.cong_nhan_may, "Công ty X", "Hồ Chí Minh","4 ngày trước"));
 
+    }
+
+    private void Button_nav(){
+        View header = navigationView.getHeaderView(0);
+        btnLogin = header.findViewById(R.id.btn_nav_login);
+        btnSignup = header.findViewById(R.id.btn_nav_signup);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignIn.class);
+                startActivity(intent);
+            }
+        });
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
     }
 }

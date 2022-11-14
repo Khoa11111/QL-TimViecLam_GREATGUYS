@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEBEB"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:openDrawer="end">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -123,8 +124,6 @@
         android:layout_height="match_parent"
         app:menu="@menu/list_nav"
         android:layout_gravity="end">
-
-
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
