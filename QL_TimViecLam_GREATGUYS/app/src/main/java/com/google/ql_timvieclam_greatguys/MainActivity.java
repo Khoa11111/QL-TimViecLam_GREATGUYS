@@ -2,6 +2,8 @@ package com.google.ql_timvieclam_greatguys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.ql_timvieclam_greatguys.CacTinTuyenDung.TinTuyenDung;
 import com.google.ql_timvieclam_greatguys.CacTinTuyenDung.TuyenDungAdapter;
 import com.google.ql_timvieclam_greatguys.CacViecLam.Adapter;
@@ -22,24 +25,28 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imageView;
+    ImageView imageMenu;
     RecyclerView mList;
     List<ViecLam> appList;
     ListView lv;
     ArrayList<TinTuyenDung> arrayList;
     TuyenDungAdapter adapter;
+    NavigationView navigationView;
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageView = findViewById(R.id.imageMessage);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        navigationView.inflateHeaderView(R.layout.layout_nav_header);
+
+        drawerLayout = findViewById(R.id.nav);
+        imageMenu = findViewById(R.id.image_Menu);
+        imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SignIn.class);
-                startActivity(intent);
+                drawerLayout.openDrawer(GravityCompat.END);
             }
         });
 
