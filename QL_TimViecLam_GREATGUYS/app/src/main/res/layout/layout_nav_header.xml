@@ -19,7 +19,8 @@
             android:src="@drawable/ic_baseline_person_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/txt_nav_name"
@@ -33,7 +34,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/img_nav_avatar"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/txt_nav_email"
@@ -46,7 +48,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/img_nav_avatar"
-            app:layout_constraintTop_toTopOf="@+id/txt_nav_name" />
+            app:layout_constraintTop_toTopOf="@+id/txt_nav_name"
+            android:layout_marginTop="20dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/silver"/>
+            android:background="@color/black"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

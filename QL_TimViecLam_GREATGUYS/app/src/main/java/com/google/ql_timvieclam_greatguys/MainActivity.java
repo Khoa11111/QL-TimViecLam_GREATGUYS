@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -35,17 +36,17 @@ public class MainActivity extends AppCompatActivity {
     TuyenDungAdapter adapter;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
-    AppCompatButton btnLogin, btnSignup;
+    LinearLayout btnLogin, btnSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        navigationView.inflateHeaderView(R.layout.layout_nav_header);
-
-        drawerLayout = findViewById(R.id.nav);
+        drawerLayout = findViewById(R.id.drawer);
+        navigationView = findViewById(R.id.nav);
         imageMenu = findViewById(R.id.image_Menu);
+
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        navigationView.inflateHeaderView(R.layout.layout_nav_header);
+
+        View header = navigationView.getHeaderView(0);
+        btnLogin = header.findViewById(R.id.btn_nav_login);
+        btnSignup = header.findViewById(R.id.btn_nav_signup);
+
+        Button_nav();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -61,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_DangXuat:
                         Intent iDangxuat = new Intent(MainActivity.this, SignIn.class);
                         startActivity(iDangxuat);
+                        break;
                 }
                 return false;
             }
         });
+
 
 
         mList = findViewById(R.id.list);
@@ -103,10 +113,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Button_nav(){
-        View header = navigationView.getHeaderView(0);
-        btnLogin = header.findViewById(R.id.btn_nav_login);
-        btnSignup = header.findViewById(R.id.btn_nav_signup);
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

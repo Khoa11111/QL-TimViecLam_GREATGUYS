@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "343100090309",
+    "project_id": "ql-timvieclamdb",
+    "storage_bucket": "ql-timvieclamdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343100090309:android:2f6bc8e2d62f3398524dac",
+        "android_client_info": {
+          "package_name": "com.google.ql_timvieclam_greatguys"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343100090309-hs9oi6u260qcqb1ollk0jqjddndbl9hn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWLYXqnVr_1Z0L72QMBxwN7bJeKCiQZLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343100090309-hs9oi6u260qcqb1ollk0jqjddndbl9hn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
