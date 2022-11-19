@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Hồ sơ của bạn">
+        <menu>
+            <item
+                android:id="@+id/menu_QuanLyNguoiDung"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:title="Quản lý tài khoản" />
+            <item
+                android:id="@+id/menu_QuanLyCV"
+                android:icon="@drawable/ic_qlhoso"
+                android:title="Quản lý CV" />
+        </menu>
+    </item>
+    <item android:title="Việc làm của bạn">
+        <menu>
+            <item android:id="@+id/menu_ViecLamDaLuu"
+                android:icon="@drawable/ic_baseline_star_rate_24"
+                android:title="Việc làm đã lưu"/>
+            <item android:id="@+id/menu_ViecLamUngTuyen"
+                android:icon="@drawable/ic_baseline_content_paste_go_24"
+                android:title="Việc làm đã ứng tuyển"/>
+            <item android:id="@+id/menu_DangXuat"
+                android:icon="@drawable/ic_logout"
+                android:title="Đăng xuất"/>
+        </menu>
+    </item>
+</menu>
