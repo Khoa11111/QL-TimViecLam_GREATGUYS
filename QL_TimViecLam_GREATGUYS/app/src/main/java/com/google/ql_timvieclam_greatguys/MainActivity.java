@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent iDangxuat = new Intent(MainActivity.this, SignIn.class);
                         startActivity(iDangxuat);
                         break;
+                    //Intent cho item Quản lý Người Dùng
+                    case R.id.menu_QuanLyNguoiDung:
+                        Intent iQLND = new Intent(MainActivity.this, ProfileActivity.class);
+                        startActivity(iQLND);
+                        break;
                 }
                 return false;
             }
