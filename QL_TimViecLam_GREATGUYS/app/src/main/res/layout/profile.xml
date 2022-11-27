@@ -19,7 +19,7 @@
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/arrback_signup"
+            android:id="@+id/arrback_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -27,10 +27,11 @@
             android:src="@drawable/ic_baseline_arrow_back" />
 
         <ImageButton
+            android:id="@+id/edit_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_baseline_edit_24"/>
+            android:src="@drawable/ic_baseline_edit_24" />
     </RelativeLayout>
 
     <ScrollView
@@ -50,9 +51,9 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/nhatuyendung_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_black_baseline_person_24"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="2dp" />
 
@@ -88,12 +89,12 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="10dp"
-                            android:src="@color/black" />
+                            android:src="@drawable/cv_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10 đơn xin việc" />
+                            android:text="4 đơn xin việc" />
 
                     </LinearLayout>
 
@@ -109,7 +110,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="10dp"
-                            android:src="@color/blue" />
+                            android:src="@drawable/interview_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
