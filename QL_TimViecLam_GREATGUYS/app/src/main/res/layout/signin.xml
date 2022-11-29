@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/silver">
 
     <RelativeLayout
@@ -125,6 +125,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/edt_email_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -144,6 +145,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/edt_pass_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -154,6 +156,7 @@
                 android:inputType="textPassword" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -183,6 +186,7 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/tv_signup_signin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -192,18 +196,6 @@
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:onClick="changeLayoutSignup"
-                android:id="@+id/btn_dang_ky"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/border"
-                android:text="Đăng ký"
-                android:textColor="@color/red" />
 
         </LinearLayout>
 
