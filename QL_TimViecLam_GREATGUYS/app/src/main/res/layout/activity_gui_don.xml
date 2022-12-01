@@ -23,7 +23,7 @@
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/arrback_signup"
+            android:id="@+id/arrback_signup_guidon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

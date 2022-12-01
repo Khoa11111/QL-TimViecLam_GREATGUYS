@@ -2,20 +2,20 @@ package com.google.ql_timvieclam_greatguys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -23,12 +23,14 @@ import com.google.ql_timvieclam_greatguys.CacTinTuyenDung.TinTuyenDung;
 import com.google.ql_timvieclam_greatguys.CacTinTuyenDung.TuyenDungAdapter;
 import com.google.ql_timvieclam_greatguys.CacViecLam.Adapter;
 import com.google.ql_timvieclam_greatguys.CacViecLam.ViecLam;
+import com.google.ql_timvieclam_greatguys.Database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    Database database = new Database(this,"QLTimViecLam",null,1);
     ImageView imageMenu;
     RecyclerView mList;
     List<ViecLam> appList;
@@ -38,17 +40,26 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     LinearLayout btnLogin, btnSignup;
+    TextView tvNameUser, tvEmailUser;
     String ckLogin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SQLiteQuery();
+
         AnhXa();
+
         ckLogin=getBundleData();
+
         setHeaderViewAndListener();
+
         setRecycleViewCacNganh();
+
         setListViewTinTuyenDung();
+
         BatSuKien();
     }
 
@@ -61,11 +72,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setHeaderViewAndListener(){
-        navigationView.inflateHeaderView(R.layout.layout_nav_header);
-
-        View header = navigationView.getHeaderView(0);
-        btnLogin = header.findViewById(R.id.btn_nav_login);
-        btnSignup = header.findViewById(R.id.btn_nav_signup);
+        if(ckLogin.isEmpty()){
+            navigationView.inflateHeaderView(R.layout.layout_nav_header_logout);
+            View header = navigationView.getHeaderView(0);
+            btnLogin = header.findViewById(R.id.btn_nav_login);
+            btnSignup = header.findViewById(R.id.btn_nav_signup);
+            onClickLoginAndSignUpInHeaderView();
+        }
+        else{
+            navigationView.inflateHeaderView(R.layout.layout_nav_header_login);
+            View header = navigationView.getHeaderView(0);
+            tvNameUser = header.findViewById(R.id.txt_nav_name);
+            tvEmailUser = header.findViewById(R.id.txt_nav_email);
+            setNameAndEmailHeaderView();
+        }
     }
 
     private void setRecycleViewCacNganh(){
@@ -102,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
     private void BatSuKien(){
         onClickMenu();
         onClickItemMenu();
-        onClickLoginAndSignUpInHeaderView();
     }
 
 
@@ -133,6 +152,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setNameAndEmailHeaderView(){
+        Cursor data = database.GetData("Select accEmail,accName " +
+                "From AccUserInfor " +
+                "Where accEmail = '"+ckLogin+"'");
+        while (data.moveToNext()){
+            String email = data.getString(0);
+            String name = data.getString(1);
+            tvEmailUser.setText(email);
+            tvNameUser.setText(name);
+        }
+    }
+
     private void onClickItemMenu(){
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -140,8 +171,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menu_DangXuat:
                         if (CheckLogin() == true){
-                            Intent iDangxuat = new Intent(MainActivity.this, SignIn.class);
-                            startActivity(iDangxuat);
+                            ckLogin = "";
+                            View header = navigationView.getHeaderView(0);
+                            navigationView.removeHeaderView(header);
+                            navigationView.inflateHeaderView(R.layout.layout_nav_header_logout);
+                            View header2 = navigationView.getHeaderView(0);
+                            btnLogin = header2.findViewById(R.id.btn_nav_login);
+                            btnSignup = header2.findViewById(R.id.btn_nav_signup);
+                            onClickLoginAndSignUpInHeaderView();
+                            drawerLayout.closeDrawer(GravityCompat.END);
                             break;
                         }
                         Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
@@ -182,5 +220,16 @@ public class MainActivity extends AppCompatActivity {
             return "";
         }
         return "";
+    }
+
+    private void SQLiteQuery(){
+        database.QueryData("CREATE TABLE IF NOT EXISTS AccUserInfor(" +
+                "id integer primary key autoincrement," +
+                "accEmail varchar(50) not null," +
+                "accPassword varchar(50) not null," +
+                "accName nvarchar(50) not null," +
+                "accSDT varchar(15) not null," +
+                "accGT nvarchar(10)," +
+                "accThanhPho nvarchar(30))");
     }
 }
