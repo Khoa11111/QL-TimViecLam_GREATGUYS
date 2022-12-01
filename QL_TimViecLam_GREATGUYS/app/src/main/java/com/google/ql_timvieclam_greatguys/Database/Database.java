@@ -12,13 +12,11 @@ public class Database extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
-    // truy vấn không kết quả: CREATE, INSERT, UPDATE, DELETE
     public void QueryData(String sql){
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL(sql);
     }
 
-    // truy vấn có trả kết quả: SELECT
     public Cursor GetData(String sql){
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql,null);

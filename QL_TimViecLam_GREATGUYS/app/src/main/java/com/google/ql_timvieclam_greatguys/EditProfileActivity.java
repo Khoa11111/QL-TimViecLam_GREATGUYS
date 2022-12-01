@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class EditProfileActivity extends AppCompatActivity {
     private ImageView arrback_profile;
+    String ckLogin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,8 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.edit_profile);
 
         arrback_profile = (ImageView) findViewById(R.id.arrback_profile);
+
+        ckLogin = getBundleData();
 
         arrback_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +37,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent profile = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("email",ckLogin);
+                        profile.putExtra("data",bundle);
                         startActivity(profile);
                     }
                 });
@@ -47,5 +53,18 @@ public class EditProfileActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+    }
+
+    private String getBundleData(){
+        Intent intent = getIntent();
+        if (intent != null){
+            Bundle bundle = intent.getBundleExtra("data");
+            if (bundle != null){
+                String data = bundle.getString("email");
+                return data;
+            }
+            return "";
+        }
+        return "";
     }
 }

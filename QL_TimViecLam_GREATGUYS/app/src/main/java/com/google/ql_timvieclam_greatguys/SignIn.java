@@ -90,7 +90,14 @@ public class SignIn extends AppCompatActivity {
             return;
         }
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+        BundleSendEmail();
+    }
+
+    private void BundleSendEmail(){
         Intent intent = new Intent(SignIn.this,MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("email",edtEmail.getText().toString().trim());
+        intent.putExtra("data",bundle);
         startActivity(intent);
     }
 }
