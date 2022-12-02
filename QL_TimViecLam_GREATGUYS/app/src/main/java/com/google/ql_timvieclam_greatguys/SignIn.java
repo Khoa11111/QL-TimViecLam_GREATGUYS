@@ -20,14 +20,12 @@ public class SignIn extends AppCompatActivity {
     TextView tvSignup;
     EditText edtEmail, edtPass;
     AppCompatButton btnSignIn;
-    String ckLogin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
-        ckLogin = getBundleData();
         AnhXa();
         BatSuKien();
     }
@@ -91,24 +89,9 @@ public class SignIn extends AppCompatActivity {
             return;
         }
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+        CkLogin.ckLogin = email;
         Intent intent = new Intent(SignIn.this,MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("email",edtEmail.getText().toString().trim());
-        intent.putExtra("data",bundle);
         startActivity(intent);
-    }
-
-    private String getBundleData(){
-        Intent intent = getIntent();
-        if (intent != null){
-            Bundle bundle = intent.getBundleExtra("data");
-            if (bundle != null){
-                String data = bundle.getString("email");
-                return data;
-            }
-            return "";
-        }
-        return "";
     }
 
 }

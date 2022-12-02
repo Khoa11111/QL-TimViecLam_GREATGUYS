@@ -18,14 +18,12 @@ public class SignUp extends AppCompatActivity {
     ImageView imvBack;
     EditText edtEmail, edtPass, edtComfirmPass, edtName, edtSDT;
     AppCompatButton btnSignUp;
-    String ckLogin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        ckLogin = getBundleData();
         AnhXa();
         BatSuKien();
     }
@@ -50,9 +48,6 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUp.this, MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("email",ckLogin);
-                intent.putExtra("data",bundle);
                 startActivity(intent);
             }
         });
@@ -85,10 +80,8 @@ public class SignUp extends AppCompatActivity {
         if(data.getCount() == 0){
             InsertData();
             Toast.makeText(this, "Đăng Ký thành công", Toast.LENGTH_SHORT).show();
+            CkLogin.ckLogin = edtEmail.getText().toString().trim();
             Intent intent = new Intent(SignUp.this,MainActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("email",edtEmail.getText().toString().trim());
-            intent.putExtra("data",bundle);
             startActivity(intent);
         }
         while(data.moveToNext()){
@@ -101,9 +94,6 @@ public class SignUp extends AppCompatActivity {
         InsertData();
         Toast.makeText(this, "Đăng Ký thành công", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(SignUp.this,MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("email",edtEmail.getText().toString().trim());
-        intent.putExtra("data",bundle);
         startActivity(intent);
     }
 
@@ -117,16 +107,4 @@ public class SignUp extends AppCompatActivity {
                 " VALUES(null,'"+email+"','"+pass+"','"+name+"','"+sdt+"',null,null)");
     }
 
-    private String getBundleData(){
-        Intent intent = getIntent();
-        if (intent != null){
-            Bundle bundle = intent.getBundleExtra("data");
-            if (bundle != null){
-                String data = bundle.getString("email");
-                return data;
-            }
-            return "";
-        }
-        return "";
-    }
 }

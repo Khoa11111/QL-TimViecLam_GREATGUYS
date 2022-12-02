@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     LinearLayout btnLogin, btnSignup;
     TextView tvNameUser, tvEmailUser;
-    String ckLogin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         SQLiteQuery();
 
         AnhXa();
-
-        ckLogin=getBundleData();
 
         setHeaderViewAndListener();
 
@@ -72,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setHeaderViewAndListener(){
-        if(ckLogin.isEmpty()){
+        if(CkLogin.ckLogin.isEmpty()){
             navigationView.inflateHeaderView(R.layout.layout_nav_header_logout);
             View header = navigationView.getHeaderView(0);
             btnLogin = header.findViewById(R.id.btn_nav_login);
@@ -155,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     private void setNameAndEmailHeaderView(){
         Cursor data = database.GetData("Select accEmail,accName " +
                 "From AccUserInfor " +
-                "Where accEmail = '"+ckLogin+"'");
+                "Where accEmail = '"+CkLogin.ckLogin+"'");
         while (data.moveToNext()){
             String email = data.getString(0);
             String name = data.getString(1);
@@ -171,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menu_DangXuat:
                         if (CheckLogin() == true){
-                            ckLogin = "";
                             View header = navigationView.getHeaderView(0);
                             navigationView.removeHeaderView(header);
                             navigationView.inflateHeaderView(R.layout.layout_nav_header_logout);
@@ -180,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                             btnSignup = header2.findViewById(R.id.btn_nav_signup);
                             onClickLoginAndSignUpInHeaderView();
                             drawerLayout.closeDrawer(GravityCompat.END);
+                            CkLogin.ckLogin = "";
                             break;
                         }
                         Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
@@ -188,9 +185,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_QuanLyNguoiDung:
                         if (CheckLogin() == true){
                             Intent iQLND = new Intent(MainActivity.this, ProfileActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("email",ckLogin);
-                            iQLND.putExtra("data",bundle);
                             startActivity(iQLND);
                             break;
                         }
@@ -203,24 +197,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Boolean CheckLogin(){
-        if (ckLogin.isEmpty()){
+        if (CkLogin.ckLogin.isEmpty()){
             return false;
         }
         return true;
     }
 
-    private String getBundleData(){
-        Intent intent = getIntent();
-        if (intent != null){
-            Bundle bundle = intent.getBundleExtra("data");
-            if (bundle != null){
-                String data = bundle.getString("email");
-                return data;
-            }
-            return "";
-        }
-        return "";
-    }
 
     private void SQLiteQuery(){
         database.QueryData("CREATE TABLE IF NOT EXISTS AccUserInfor(" +

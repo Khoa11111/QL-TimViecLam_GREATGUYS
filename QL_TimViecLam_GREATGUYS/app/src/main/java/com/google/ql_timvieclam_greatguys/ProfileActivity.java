@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ProfileActivity extends AppCompatActivity {
     private ImageView arrback_main;
     private ImageButton edit_profile_button;
-    String ckLogin= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +18,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.profile);
 
         AnhXa();
-        ckLogin = getBundleData();
         BatSuKien();
     }
 
@@ -38,9 +36,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent main = new Intent(ProfileActivity.this, MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("email",ckLogin);
-                main.putExtra("data",bundle);
                 startActivity(main);
             }
         });
@@ -51,25 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent editProfile = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("email",ckLogin);
-                editProfile.putExtra("data",bundle);
                 startActivity(editProfile);
             }
         });
     }
-
-    private String getBundleData(){
-        Intent intent = getIntent();
-        if (intent != null){
-            Bundle bundle = intent.getBundleExtra("data");
-            if (bundle != null){
-                String data = bundle.getString("email");
-                return data;
-            }
-            return "";
-        }
-        return "";
-    }
-
 }
