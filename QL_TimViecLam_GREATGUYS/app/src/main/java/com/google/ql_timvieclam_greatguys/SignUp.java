@@ -67,10 +67,9 @@ public class SignUp extends AppCompatActivity {
                 }
                 if (edtPass.getText().toString().equals(edtComfirmPass.getText().toString())){
                     checkEmailSignup();
-                } else {
-                    Toast.makeText(SignUp.this,"Mật khẩu xác nhận chưa chính xác",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Toast.makeText(SignUp.this,"Mật khẩu xác nhận chưa chính xác",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,17 +83,19 @@ public class SignUp extends AppCompatActivity {
             Intent intent = new Intent(SignUp.this,MainActivity.class);
             startActivity(intent);
         }
-        while(data.moveToNext()){
-            String checkEmail = data.getString(0);
-            if(checkEmail.equals(edtEmail.getText().toString().trim())){
-                Toast.makeText(SignUp.this,"Tài khoản đã tồn tại",Toast.LENGTH_SHORT).show();
-                return;
+        else{
+            while(data.moveToNext()){
+                String checkEmail = data.getString(0);
+                if(checkEmail.equals(edtEmail.getText().toString().trim())){
+                    Toast.makeText(SignUp.this,"Tài khoản đã tồn tại",Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
+            InsertData();
+            Toast.makeText(this, "Đăng Ký thành công", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SignUp.this,MainActivity.class);
+            startActivity(intent);
         }
-        InsertData();
-        Toast.makeText(this, "Đăng Ký thành công", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SignUp.this,MainActivity.class);
-        startActivity(intent);
     }
 
     private void InsertData(){
@@ -102,9 +103,18 @@ public class SignUp extends AppCompatActivity {
         String pass = edtPass.getText().toString().trim();
         String name = edtName.getText().toString().trim();
         String sdt = edtSDT.getText().toString().trim();
+        try{
 
-        database.QueryData("INSERT INTO AccUserInfor" +
-                " VALUES(null,'"+email+"','"+pass+"','"+name+"','"+sdt+"',null,null)");
+            database.QueryData("INSERT INTO AccUserInfor" +
+                    " VALUES(null,'"+email+"','"+pass+"','"+name+"','"+sdt+"',null,null)");
+
+            database.QueryData("INSERT INTO HoSoCV" +
+                    " VALUES(null,'"+name+"',null,null,null,'"+sdt+"','"+email+"',null,null,null,null)");
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Xảy ra lỗi khi Insert into", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
