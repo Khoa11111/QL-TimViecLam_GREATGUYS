@@ -68,15 +68,26 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edtEmail.getText().toString().isEmpty() || edtPass.getText().toString().isEmpty()){
-                    Toast.makeText(SignIn.this,"Email hoặc mật khẩu không được để trống",Toast.LENGTH_SHORT).show();
-                    return;
+                if (checkEmpty()){
+                    checkEmailAndPass();
                 }
-                checkEmailAndPass();
+
             }
         });
     }
-
+    private boolean checkEmpty(){
+        if (edtEmail.getText().toString().isEmpty()){
+            edtEmail.setError("Email không được để trống");
+            edtEmail.requestFocus();
+            return false;
+        }
+        if(edtPass.getText().toString().isEmpty()){
+            edtPass.setError("Mật khẩu không được để trống");
+            edtPass.requestFocus();
+            return false;
+        }
+        return true;
+    }
     private void checkEmailAndPass(){
         String email = edtEmail.getText().toString().trim();
         String pass = edtPass.getText().toString().trim();
