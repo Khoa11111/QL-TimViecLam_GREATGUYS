@@ -2,24 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textviewTuyendung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="Tuyển dụng"
         android:textColor="#000"
-        android:textSize="22sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textviewLuong"
-        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textviewTuyendung"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:text="Lương"
         android:textColor="#ff00"
@@ -29,9 +29,9 @@
 
     <ImageView
         android:id="@+id/imageviewHinh"
-        android:layout_below="@id/textviewLuong"
         android:layout_width="110dp"
         android:layout_height="110dp"
+        android:layout_below="@id/textviewLuong"
         android:layout_marginLeft="10dp"
         android:padding="10dp" />
 
@@ -39,7 +39,8 @@
         android:id="@+id/textviewCty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_below="@+id/textviewLuong"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/imageviewHinh"
         android:text="Tên"
         android:textColor="#000"

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.ql_timvieclam_greatguys.R;
+import com.google.ql_timvieclam_greatguys.onClickItemViecLamListener;
 
 import java.util.List;
 
@@ -18,20 +19,37 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     private final Context context;
     private final List<ViecLam> apps;
+    private onClickItemViecLamListener listener;
 
-    public Adapter(Context context, List<ViecLam> apps) {
+    public Adapter(Context context, List<ViecLam> apps, onClickItemViecLamListener listener) {
         this.context = context;
         this.apps = apps;
+        this.listener = listener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private ViecLam viecLam;
         TextView mName;
         ImageView mImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onClickItemViecLam(viecLam);
+                }
+            });
+
             mName = itemView.findViewById(R.id.name);
             mImage = itemView.findViewById(R.id.image);
+        }
+
+        private void binhData(ViecLam viecLam){
+            this.viecLam = viecLam;
+            mName.setText(viecLam.getName());
+            mImage.setImageResource(viecLam.getImage());
         }
     }
 
@@ -44,11 +62,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder, int position) {
-        ViecLam app = apps.get(position);
-
-        holder.mName.setText(app.getName());
-        holder.mImage.setImageResource(app.getImage());
-
+        holder.binhData(apps.get(position));
     }
 
     @Override
