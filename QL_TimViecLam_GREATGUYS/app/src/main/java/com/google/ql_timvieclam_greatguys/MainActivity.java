@@ -96,11 +96,9 @@ public class MainActivity extends AppCompatActivity {
         appList.add(new ViecLam(R.drawable.tai_xe_o_to,"Tài xế ô tô"));
         appList.add(new ViecLam(R.drawable.cham_soc_khach_hang,"Chăm sóc khách hàng"));
         appList.add(new ViecLam(R.drawable.nv_phuc_vu,"Nhân viên phục vụ"));
-
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mList.setLayoutManager(manager);
-
         Adapter adaptor = new Adapter(this,appList);
         mList.setAdapter(adaptor);
     }
@@ -186,6 +184,14 @@ public class MainActivity extends AppCompatActivity {
                         if (CheckLogin() == true){
                             Intent iQLND = new Intent(MainActivity.this, ProfileActivity.class);
                             startActivity(iQLND);
+                            break;
+                        }
+                        Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.menu_QuanLyCV:
+                        if (CheckLogin() == true){
+                            Intent CvIn = new Intent(MainActivity.this, CVActivity.class);
+                            startActivity(CvIn);
                             break;
                         }
                         Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();

@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".EditProfileActivity"/>
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".CVActivity"/>
+        <activity android:name=".EditCvActivity"/>
     </application>
 
 </manifest>
