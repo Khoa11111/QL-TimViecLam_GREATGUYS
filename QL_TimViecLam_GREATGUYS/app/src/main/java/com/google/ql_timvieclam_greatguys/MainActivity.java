@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -68,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         mList = findViewById(R.id.list);
     }
 
+    private void BatSuKien(){
+        onClickMenu();
+        onClickItemMenu();
+        onClickItemListview();
+    }
+
+    // thiết lập layout headerview và sự kiện nhấn nút
     private void setHeaderViewAndListener(){
         if(CkLogin.ckLogin.isEmpty()){
             navigationView.inflateHeaderView(R.layout.layout_nav_header_logout);
@@ -85,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         }
     }
 
+    // Đẩy dữ liệu từ DB vào và hiển thị trên Recycleview
     private void setRecycleViewCacNganh(){
 
         appList = new ArrayList<>();
@@ -105,36 +114,31 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         mList.setAdapter(adaptor);
     }
 
+    // hiển thị dữ liệu tin tuyển dụng lên listview
     private void setListViewTinTuyenDung(){
         arrayList = new ArrayList<>();
         HienDanhSachTinTuyenDung();
-
-        adapter = new TuyenDungAdapter(this, R.layout.dong_viec_lam, arrayList);
-        lv.setAdapter(adapter);
     }
 
+    // Đọc dữ liệu từ DB và đẩy dữ liệu vào litsview
     private void HienDanhSachTinTuyenDung(){
         Cursor data = database.GetData("Select * from TinTuyenDung");
         while (data.moveToNext()){
-            String tuyendung = data.getString(1);
-            String luong = data.getString(2);
-            int hinhanh = data.getInt(3);
-            String ten = data.getString(4);
-            String diadiem = data.getString(5);
-            String tinuutien = data.getString(6);
+                String tuyendung = data.getString(1);
+                String luong = data.getString(2);
+                int hinhanh = data.getInt(3);
+                String ten = data.getString(4);
+                String diadiem = data.getString(5);
+                String tinuutien = data.getString(6);
 
-            arrayList.add(new TinTuyenDung(tuyendung,luong,hinhanh,ten,diadiem,tinuutien));
+                arrayList.add(new TinTuyenDung(tuyendung,luong,hinhanh,ten,diadiem,tinuutien));
         }
         adapter = new TuyenDungAdapter(this, R.layout.dong_viec_lam, arrayList);
         lv.setAdapter(adapter);
     }
 
-    private void BatSuKien(){
-        onClickMenu();
-        onClickItemMenu();
-    }
 
-
+    // Sự kiện bấm vào icon menu
     private void onClickMenu(){
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         });
     }
 
+    // Sự kiện bấm nút đăng nhập và đăng ký trong headerview
     private void onClickLoginAndSignUpInHeaderView(){
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         });
     }
 
+    // hiển thị tên người dùng và email của người dùng lên headerview
     private void setNameAndEmailHeaderView(){
         Cursor data = database.GetData("Select accEmail,accName " +
                 "From AccUserInfor " +
@@ -174,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         }
     }
 
+    // Sự kiện bấm vào các item trong menu
     private void onClickItemMenu(){
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -211,12 +218,21 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                         }
                         Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.menu_ViecLamDaLuu:
+                        if (CheckLogin() == true){
+                            Intent iVLDL = new Intent(MainActivity.this, ViecLamDaLuu.class);
+                            startActivity(iVLDL);
+                            break;
+                        }
+                        Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return false;
             }
         });
     }
 
+    // Kiểm tra người dùng đã đăng nhập chưa
     private Boolean CheckLogin(){
         if (CkLogin.ckLogin.isEmpty()){
             return false;
@@ -224,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         return true;
     }
 
-    // onClickItemRecycleview
+    // Sự kiện bấm vào các item trong recycleview các ngành
     @Override
     public void onClickItemViecLam(ViecLam viecLam) {
         switch (viecLam.getName()){
@@ -263,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         }
     }
 
+    // thiết lập dữ liệu đổ vào listview khi bấm từng nút trong recycleview ngành
     private void setDataListviewTinTuyenDung_onClickItemRecycleview(String dk){
         Cursor data = database.GetData("SELECT * From TinTuyenDung where Nganh = '"+dk+"'");
         while (data.moveToNext()){
@@ -279,6 +296,40 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         lv.setAdapter(adapter);
     }
 
+    // Sự kiện nhấn các item trong listview tin tuyển dụng
+    private void onClickItemListview(){
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                toList(i);
+            }
+        });
+    }
+
+    // Thêm dữ liệu vào bảng ViecLamDaLuu
+    private void toList(int i){
+        int count = i +1;
+        Cursor data = database.GetData("select * from TinTuyenDung limit "+count+"");
+        while (data.moveToNext()){
+            if (data.isLast()){
+                int id = data.getInt(0);
+                String tuyendung = data.getString(1);
+                String luong = data.getString(2);
+                int hinhanh = data.getInt(3);
+                String ten = data.getString(4);
+                String diadiem = data.getString(5);
+                String tinuutien = data.getString(6);
+
+                Cursor data2 = database.GetData("Select id from ViecLamDaLuu where idTTD='"+id+"'");
+                if (data2.getCount() == 0){
+                    database.QueryData("INSERT INTO ViecLamDaLuu " +
+                            "VALUES(null,'"+id+"','"+tuyendung+"','"+luong+"',"+hinhanh+",'"+ten+"','"+diadiem+"','"+tinuutien+"')");
+                }
+            }
+        }
+    }
+
+    // Câu lệnh SQLite
     private void SQLiteQuery(){
         database.QueryData("CREATE TABLE IF NOT EXISTS AccUserInfor(" +
                 "id integer primary key autoincrement," +
@@ -299,13 +350,30 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                 "TinUuTien nvarchar(50) null," +
                 "Nganh nvarchar(50) not null)");
 
-        database.QueryData("INSERT INTO TinTuyenDung" +
-                " VALUES(null,'Nhân viên chăm sóc khách hàng tại Quận 3','6.000.000 - 50.000.000đ/ tháng',"+R.drawable.cham_soc_khach_hang+",'Công ty A','Đà Nẵng','4 ngày trước','Chăm sóc khách hàng')," +
-                       "(null,'Nhân viên bán hàng tại siêu thị Go tại Đà Nẵng','5.000.000 - 10.000.000đ/ tháng',"+R.drawable.nv_ban_hang+",'B Group','Đằ nẵng','1 ngày trước','Nhân viên bán hàng')," +
-                       "(null,'Tài xế tại khách sạn Hoàng Anh Gia Lai','11.000.000 - 15.000.000đ/ tháng',"+R.drawable.tai_xe_o_to+",'Nguyễn C','Đà nẵng','7 ngày trước','Tài xế ô tô')," +
-                       "(null,'Công nhân may vá cho danh nghiệp','40.000.000 - 50.000.000đ/ tháng',"+R.drawable.cong_nhan_may+",'Công ty X','Hồ Chí Minh','4 ngày trước','Công nhân may')," +
-                       "(null,'Bảo vệ tại công ty Sun','4.000.000 - 7.000.000/ tháng',"+R.drawable.bao_ve+",'Công ty Sun','Hà Nội','1 ngày trước','Bảo vệ')," +
-                       "(null,'Công nhân nhà máy thủy điện Hòa Bình','20.000.00 - 50.000.000/ tháng',"+R.drawable.cong_nhan+",'Nhà máy thủy điện HB','Tp.Hòa Bình','2 ngày trước','Công nhân')," +
-                       "(null,'Nhân viên phục vụ tại nhà hàng Ngon','7.000.000 - 12.000.000/ tháng',"+R.drawable.nv_phuc_vu+",'Nhà hàng Ngon','Cà Mau','7 ngày trước','Nhân viên phục vụ')");
+        Cursor data = database.GetData("Select * from TinTuyenDung");
+        if (data.getCount() == 0){
+            database.QueryData("INSERT INTO TinTuyenDung" +
+                    " VALUES(null,'Nhân viên chăm sóc khách hàng tại Quận 3','6.000.000 - 50.000.000đ/ tháng',"+R.drawable.cham_soc_khach_hang+",'Công ty A','Đà Nẵng','4 ngày trước','Chăm sóc khách hàng')," +
+                    "(null,'Nhân viên bán hàng tại siêu thị Go tại Đà Nẵng','5.000.000 - 10.000.000đ/ tháng',"+R.drawable.nv_ban_hang+",'B Group','Đằ nẵng','1 ngày trước','Nhân viên bán hàng')," +
+                    "(null,'Tài xế tại khách sạn Hoàng Anh Gia Lai','11.000.000 - 15.000.000đ/ tháng',"+R.drawable.tai_xe_o_to+",'Nguyễn C','Đà nẵng','7 ngày trước','Tài xế ô tô')," +
+                    "(null,'Công nhân may vá cho danh nghiệp','40.000.000 - 50.000.000đ/ tháng',"+R.drawable.cong_nhan_may+",'Công ty X','Hồ Chí Minh','4 ngày trước','Công nhân may')," +
+                    "(null,'Bảo vệ tại công ty Sun','4.000.000 - 7.000.000/ tháng',"+R.drawable.bao_ve+",'Công ty Sun','Hà Nội','1 ngày trước','Bảo vệ')," +
+                    "(null,'Công nhân nhà máy thủy điện Hòa Bình','20.000.00 - 50.000.000/ tháng',"+R.drawable.cong_nhan+",'Nhà máy thủy điện HB','Tp.Hòa Bình','2 ngày trước','Công nhân')," +
+                    "(null,'Nhân viên phục vụ tại nhà hàng Ngon','7.000.000 - 12.000.000/ tháng',"+R.drawable.nv_phuc_vu+",'Nhà hàng Ngon','Cà Mau','7 ngày trước','Nhân viên phục vụ')");
+        }
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS ViecLamDaLuu(" +
+                "id integer primary key autoincrement," +
+                "idTTD integer not null," +
+                "TuyenDung nvarchar(50) not null," +
+                "Luong nvarchar(50) null," +
+                "Hinhanh int null," +
+                "Ten nvarchar(50) null," +
+                "DiaDiem nvarchar(50) null," +
+                "TinUuTien nvarchar(50) null)");
+
+        //database.QueryData("delete from TinTuyenDung");
+        //database.QueryData("drop table ViecLamDaLuu");
     }
+    // select * from TinTuyenDung limit 3
 }

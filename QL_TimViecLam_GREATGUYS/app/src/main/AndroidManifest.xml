@@ -40,6 +40,7 @@
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".CVActivity"/>
         <activity android:name=".EditCvActivity"/>
+        <activity android:name=".ViecLamDaLuu"/>
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ public class EditProfileActivity extends AppCompatActivity {
         arrback_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditProfileActivity.this);
                 //Thiết lập tiêu đề cho alert dialog
                 alertDialogBuilder.setTitle("Rời khỏi chỉnh sửa");
