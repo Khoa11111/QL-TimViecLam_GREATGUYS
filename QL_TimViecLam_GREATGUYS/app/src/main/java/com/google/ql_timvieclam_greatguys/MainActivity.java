@@ -254,34 +254,42 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
             case "Hiện tất cả":
                 arrayList.clear();
                 HienDanhSachTinTuyenDung();
+                CkLogin.idTTD = 0;
                 break;
             case "Bảo vệ":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Bảo vệ");
+                CkLogin.idTTD = 5;
                 break;
             case "Công nhân":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Công nhân");
+                CkLogin.idTTD = 6;
                 break;
             case "Nhân viên bán hàng":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Nhân viên bán hàng");
+                CkLogin.idTTD = 2;
                 break;
             case "Công nhân may":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Công nhân may");
+                CkLogin.idTTD = 4;
                 break;
             case "Tài xế ô tô":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Tài xế ô tô");
+                CkLogin.idTTD = 3;
                 break;
             case "Chăm sóc khách hàng":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Chăm sóc khách hàng");
+                CkLogin.idTTD = 1;
                 break;
             case "Nhân viên phục vụ":
                 arrayList.clear();
                 setDataListviewTinTuyenDung_onClickItemRecycleview("Nhân viên phục vụ");
+                CkLogin.idTTD = 7;
                 break;
         }
     }
@@ -308,9 +316,17 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CkLogin.getIdTinTuyenDung(MainActivity.this,i);
-                Intent intent = new Intent(MainActivity.this, ChiTietTinTuyenDung.class);
-                startActivity(intent);
+                if(CkLogin.idTTD != 0)
+                {
+                    if(CkLogin.getIdTinTuyenDung(MainActivity.this, i, CkLogin.idTTD)){
+                        Intent intent = new Intent(MainActivity.this, ChiTietTinTuyenDung.class);
+                        startActivity(intent);
+                    }
+                }else
+                if(CkLogin.getIdTinTuyenDung(MainActivity.this,i)){
+                    Intent intent = new Intent(MainActivity.this, ChiTietTinTuyenDung.class);
+                    startActivity(intent);
+                }
             }
         });
     }

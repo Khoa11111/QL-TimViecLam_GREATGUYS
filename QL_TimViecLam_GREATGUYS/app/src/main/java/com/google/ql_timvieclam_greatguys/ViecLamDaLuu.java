@@ -25,6 +25,7 @@ public class ViecLamDaLuu extends AppCompatActivity {
     Database database = new Database(this,"QLTimViecLam",null,1);
     ImageView imgBack;
     ListView listView;
+    boolean LongClick = false;
     ArrayList<TinTuyenDung> mlistviewList;
     TuyenDungAdapter adapter;
 
@@ -89,21 +90,28 @@ public class ViecLamDaLuu extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CkLogin.getIdTinTuyenDung(ViecLamDaLuu.this,i);
-                Intent intent = new Intent(ViecLamDaLuu.this,ChiTietTinTuyenDung.class);
-                startActivity(intent);
+                if(CkLong()){
+                    CkLogin.getIdTinTuyenDung(ViecLamDaLuu.this,i);
+                    Intent intent = new Intent(ViecLamDaLuu.this,ChiTietTinTuyenDung.class);
+                    startActivity(intent);
+                }
             }
         });
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int ii, long l) {
+                LongClick = true;
                 Delete(ii);
                 return false;
             }
         });
     }
-
+    private boolean CkLong(){
+        if(LongClick)
+            return LongClick = !LongClick;
+        return LongClick;
+    }
 
     // Xóa item chọn
     private void Delete(int ii){
