@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         SQLiteQuery();
 
         AnhXa();
@@ -337,8 +336,21 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                 "accPassword varchar(50) not null," +
                 "accName nvarchar(50) not null," +
                 "accSDT varchar(15) not null," +
-                "accGT nvarchar(10)," +
+                "accDoB nvarchar(10)," +
                 "accThanhPho nvarchar(30))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS HoSoCV(" +
+                "id integer primary key autoincrement," +
+                "accName nvarchar(50)," +
+                "accGT nvarchar(10)," +
+                "accNgaySinh varchar(50)," +
+                "accCMND varchar(50)," +
+                "accSDT varchar(15)," +
+                "accEmail varchar(50)," +
+                "accDiaChi nvarchar(30)," +
+                "accBangCap nvarchar(10)," +
+                "accBangTA nvarchar(10)," +
+                "accSoTruong nvarchar(10))");
 
         database.QueryData("CREATE TABLE IF NOT EXISTS TinTuyenDung(" +
                 "id integer primary key autoincrement," +

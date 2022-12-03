@@ -91,6 +91,7 @@
                             android:src="@drawable/ic_black_baseline_person_24"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/ten"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -109,10 +110,33 @@
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="25dp"
+                            android:src="@drawable/ic_black_baseline_person_24"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/gioiTinh"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:text="Nam"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:weightSum="8">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
                             android:src="@drawable/ic_baseline_birthday_24"
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/ngaySinh"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -135,6 +159,7 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/canCuoc"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -157,6 +182,7 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/sdt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -179,6 +205,7 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/email"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -201,6 +228,7 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/diaChi"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -240,6 +268,7 @@
                             android:src="@drawable/ic_black_baseline_person_24"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/bangCap"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -283,6 +312,7 @@
                             android:src="@drawable/ic_black_baseline_person_24"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/bangTA"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
@@ -321,6 +351,7 @@
                             android:src="@drawable/ic_black_baseline_person_24"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/soTruong"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"

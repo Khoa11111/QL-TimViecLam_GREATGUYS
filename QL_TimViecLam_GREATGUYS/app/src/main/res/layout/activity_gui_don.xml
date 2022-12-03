@@ -49,6 +49,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/ten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -56,6 +57,27 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Giới Tính"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/gioiTinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/border" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,6 +89,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/ngaySinh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -86,6 +109,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/canCuoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -93,6 +117,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,6 +129,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/sdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -111,6 +137,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,6 +149,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -129,6 +157,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,6 +169,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/diaChi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -159,6 +189,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/bangCap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -178,6 +209,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/bangTA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -185,6 +217,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -196,6 +229,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/soTruong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -203,8 +237,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border" />
-
-
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -232,6 +264,7 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/xacNhan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
