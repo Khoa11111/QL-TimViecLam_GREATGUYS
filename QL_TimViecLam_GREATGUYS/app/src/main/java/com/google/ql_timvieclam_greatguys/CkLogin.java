@@ -9,6 +9,7 @@ import com.google.ql_timvieclam_greatguys.Database.Database;
 
 public class CkLogin {
     public static String ckLogin = "";
+    public static int id;
 
     public static int getId(Context context){
         Database database = new Database(context,"QLTimViecLam",null,1);
@@ -25,5 +26,15 @@ public class CkLogin {
                                             "FROM AccUserInfor");
         data.moveToFirst();
         return data.getInt(0);
+    }
+
+    public static void getIdTinTuyenDung(Context context, int i){
+        Database database = new Database(context,"QLTimViecLam",null,1);
+        int count = i + 1;
+        Cursor data = database.GetData("select * from TinTuyenDung limit "+count+"");
+        data.moveToLast();
+        int idT = data.getInt(0);
+        CkLogin.id = idT;
+        data.isLast();
     }
 }

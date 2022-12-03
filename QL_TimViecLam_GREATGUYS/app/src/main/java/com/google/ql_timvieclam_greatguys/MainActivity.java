@@ -225,6 +225,14 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                         }
                         Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.menu_ViecLamUngTuyen:
+                        if (CheckLogin() == true){
+                            Intent iVLDUT = new Intent(MainActivity.this, ViecLamDaUngTuyen.class);
+                            startActivity(iVLDUT);
+                            break;
+                        }
+                        Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return false;
             }
@@ -300,33 +308,13 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                toList(i);
+                CkLogin.getIdTinTuyenDung(MainActivity.this,i);
+                Intent intent = new Intent(MainActivity.this, ChiTietTinTuyenDung.class);
+                startActivity(intent);
             }
         });
     }
 
-    // Thêm dữ liệu vào bảng ViecLamDaLuu
-    private void toList(int i){
-        int count = i +1;
-        Cursor data = database.GetData("select * from TinTuyenDung limit "+count+"");
-        while (data.moveToNext()){
-            if (data.isLast()){
-                int id = data.getInt(0);
-                String tuyendung = data.getString(1);
-                String luong = data.getString(2);
-                int hinhanh = data.getInt(3);
-                String ten = data.getString(4);
-                String diadiem = data.getString(5);
-                String tinuutien = data.getString(6);
-
-                Cursor data2 = database.GetData("Select id from ViecLamDaLuu where idTTD='"+id+"'");
-                if (data2.getCount() == 0){
-                    database.QueryData("INSERT INTO ViecLamDaLuu " +
-                            "VALUES(null,'"+id+"','"+tuyendung+"','"+luong+"',"+hinhanh+",'"+ten+"','"+diadiem+"','"+tinuutien+"')");
-                }
-            }
-        }
-    }
 
     // Câu lệnh SQLite
     private void SQLiteQuery(){
@@ -362,18 +350,6 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                 "TinUuTien nvarchar(50) null," +
                 "Nganh nvarchar(50) not null)");
 
-        Cursor data = database.GetData("Select * from TinTuyenDung");
-        if (data.getCount() == 0){
-            database.QueryData("INSERT INTO TinTuyenDung" +
-                    " VALUES(null,'Nhân viên chăm sóc khách hàng tại Quận 3','6.000.000 - 50.000.000đ/ tháng',"+R.drawable.cham_soc_khach_hang+",'Công ty A','Đà Nẵng','4 ngày trước','Chăm sóc khách hàng')," +
-                    "(null,'Nhân viên bán hàng tại siêu thị Go tại Đà Nẵng','5.000.000 - 10.000.000đ/ tháng',"+R.drawable.nv_ban_hang+",'B Group','Đằ nẵng','1 ngày trước','Nhân viên bán hàng')," +
-                    "(null,'Tài xế tại khách sạn Hoàng Anh Gia Lai','11.000.000 - 15.000.000đ/ tháng',"+R.drawable.tai_xe_o_to+",'Nguyễn C','Đà nẵng','7 ngày trước','Tài xế ô tô')," +
-                    "(null,'Công nhân may vá cho danh nghiệp','40.000.000 - 50.000.000đ/ tháng',"+R.drawable.cong_nhan_may+",'Công ty X','Hồ Chí Minh','4 ngày trước','Công nhân may')," +
-                    "(null,'Bảo vệ tại công ty Sun','4.000.000 - 7.000.000/ tháng',"+R.drawable.bao_ve+",'Công ty Sun','Hà Nội','1 ngày trước','Bảo vệ')," +
-                    "(null,'Công nhân nhà máy thủy điện Hòa Bình','20.000.00 - 50.000.000/ tháng',"+R.drawable.cong_nhan+",'Nhà máy thủy điện HB','Tp.Hòa Bình','2 ngày trước','Công nhân')," +
-                    "(null,'Nhân viên phục vụ tại nhà hàng Ngon','7.000.000 - 12.000.000/ tháng',"+R.drawable.nv_phuc_vu+",'Nhà hàng Ngon','Cà Mau','7 ngày trước','Nhân viên phục vụ')");
-        }
-
         database.QueryData("CREATE TABLE IF NOT EXISTS ViecLamDaLuu(" +
                 "id integer primary key autoincrement," +
                 "idTTD integer not null," +
@@ -383,6 +359,49 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                 "Ten nvarchar(50) null," +
                 "DiaDiem nvarchar(50) null," +
                 "TinUuTien nvarchar(50) null)");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS ViecLamDaUngtuyen(" +
+                "id integer primary key autoincrement," +
+                "idTTD integer not null," +
+                "TuyenDung nvarchar(50) not null," +
+                "Luong nvarchar(50) null," +
+                "Hinhanh int null," +
+                "Ten nvarchar(50) null," +
+                "DiaDiem nvarchar(50) null," +
+                "TinUuTien nvarchar(50) null)");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS ChiTietTinTuyenDung(" +
+                "id integer primary key autoincrement," +
+                "idTTD integer not null," +
+                "hinhAnh integer not null," +
+                "title nvarchar(50) not null," +
+                "tenNguoiDang nvarchar(50) not null," +
+                "hanNopCV nvarchar(50) not null," +
+                "luong nvarchar(50) not null," +
+                "soLTuyen nvarchar(50) null," +
+                "hinhThuc nvarchar(50) null," +
+                "capBac nvarchar(50) null," +
+                "gioiTinh nvarchar(20) null," +
+                "kinhNghiem nvarchar(50) null," +
+                "diaDiem nvarchar(50) not null)");
+
+        Cursor data = database.GetData("Select * from TinTuyenDung");
+        if (data.getCount() == 0){
+            database.QueryData("INSERT INTO TinTuyenDung" +
+                    " VALUES(null,'Nhân viên chăm sóc khách hàng tại Quận 3','6 - 20 triệu vnd/tháng',"+R.drawable.cham_soc_khach_hang+",'Công ty A','Đà Nẵng','4 ngày trước','Chăm sóc khách hàng')," +
+                    "(null,'Nhân viên bán hàng tại siêu thị Go tại Đà Nẵng','5 - 10 triệu vnd/tháng',"+R.drawable.nv_ban_hang+",'B Group','Đằ nẵng','1 ngày trước','Nhân viên bán hàng')," +
+                    "(null,'Tài xế tại khách sạn Hoàng Anh Gia Lai','11 - 15 triệu vnd/tháng',"+R.drawable.tai_xe_o_to+",'Nguyễn C','Đà nẵng','7 ngày trước','Tài xế ô tô')," +
+                    "(null,'Công nhân may vá cho danh nghiệp','40 - 50 triệu vnd/tháng',"+R.drawable.cong_nhan_may+",'Công ty X','Hồ Chí Minh','4 ngày trước','Công nhân may')," +
+                    "(null,'Bảo vệ tại công ty Sun','4 - 7 triệu vnd/tháng',"+R.drawable.bao_ve+",'Công ty Sun','Hà Nội','1 ngày trước','Bảo vệ')," +
+                    "(null,'Công nhân nhà máy thủy điện Hòa Bình','20 - 50 triệu vnd/tháng',"+R.drawable.cong_nhan+",'Nhà máy thủy điện HB','Tp.Hòa Bình','2 ngày trước','Công nhân')," +
+                    "(null,'Nhân viên phục vụ tại nhà hàng Ngon','7 - 12 triệu vnd/tháng',"+R.drawable.nv_phuc_vu+",'Nhà hàng Ngon','Cà Mau','7 ngày trước','Nhân viên phục vụ')");
+        }
+
+        Cursor data1 = database.GetData("Select * from ChiTietTinTuyenDung");
+        if (data1.getCount() == 0){
+            database.QueryData("INSERT INTO ChiTietTinTuyenDung" +
+                    " VALUES(null,1,"+R.drawable.cham_soc_khach_hang+",'Nhân viên chăm sóc khách hàng tại Quận 3','Công ty A','27/2/2022','6 - 20 triệu vnd/tháng','20 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Đà Nẵng')");
+        };
 
         //database.QueryData("delete from TinTuyenDung");
         //database.QueryData("drop table ViecLamDaLuu");

@@ -41,6 +41,8 @@
         <activity android:name=".CVActivity"/>
         <activity android:name=".EditCvActivity"/>
         <activity android:name=".ViecLamDaLuu"/>
+        <activity android:name=".ViecLamDaUngTuyen"/>
+        <activity android:name=".ChiTietTinTuyenDung"/>
     </application>
 
 </manifest>

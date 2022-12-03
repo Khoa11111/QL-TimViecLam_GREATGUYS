@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -85,6 +86,15 @@ public class ViecLamDaLuu extends AppCompatActivity {
 
     // Sự kiện nhấn item trong listview
     private void onClickItemListView(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CkLogin.getIdTinTuyenDung(ViecLamDaLuu.this,i);
+                Intent intent = new Intent(ViecLamDaLuu.this,ChiTietTinTuyenDung.class);
+                startActivity(intent);
+            }
+        });
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int ii, long l) {
@@ -93,6 +103,7 @@ public class ViecLamDaLuu extends AppCompatActivity {
             }
         });
     }
+
 
     // Xóa item chọn
     private void Delete(int ii){
@@ -109,15 +120,12 @@ public class ViecLamDaLuu extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                while (data.moveToNext()){
-                    if (data.isLast()){
-                        int id = data.getInt(0);
-                        database.QueryData("delete from ViecLamDaLuu where id='"+id+"'");
-                    }
-                }
-                Toast.makeText(ViecLamDaLuu.this,"Đã Xóa",Toast.LENGTH_SHORT).show();
                 mlistviewList.clear();
+                data.moveToFirst();
+                int id = data.getInt(0);
+                database.QueryData("delete from ViecLamDaLuu where id='"+id+"'");
                 HienDanhSachTinTuyenDung();
+                Toast.makeText(ViecLamDaLuu.this,"Đã Xóa",Toast.LENGTH_SHORT).show();
             }
         });
         //Button no

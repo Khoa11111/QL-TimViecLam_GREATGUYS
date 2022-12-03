@@ -92,6 +92,7 @@ public class SignUp extends AppCompatActivity {
                 }
             }
             InsertData();
+            CkLogin.ckLogin = edtEmail.getText().toString().trim();
             Toast.makeText(this, "Đăng Ký thành công", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignUp.this,MainActivity.class);
             startActivity(intent);

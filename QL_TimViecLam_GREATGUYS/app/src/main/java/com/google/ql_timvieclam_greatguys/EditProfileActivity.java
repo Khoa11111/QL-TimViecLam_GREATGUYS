@@ -184,6 +184,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 "accThanhPho  = '" + txt_accAddress + "' " +
                 "WHERE id = " + CkLogin.getId(this) + ";";
         database.QueryData(sql);
+        CkLogin.ckLogin = txt_accEmail;
     }
 
     private void BackToProfile(){
