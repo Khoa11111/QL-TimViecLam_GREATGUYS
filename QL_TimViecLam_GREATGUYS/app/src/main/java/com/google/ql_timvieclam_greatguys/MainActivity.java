@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
                 "accPassword varchar(50) not null," +
                 "accName nvarchar(50) not null," +
                 "accSDT varchar(15) not null," +
-                "accGT nvarchar(10)," +
+                "accDoB nvarchar(10)," +
                 "accThanhPho nvarchar(30))");
 
         database.QueryData("CREATE TABLE IF NOT EXISTS HoSoCV(" +
