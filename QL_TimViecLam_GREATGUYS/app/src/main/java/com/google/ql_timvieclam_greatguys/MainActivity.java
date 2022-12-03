@@ -416,7 +416,13 @@ public class MainActivity extends AppCompatActivity implements onClickItemViecLa
         Cursor data1 = database.GetData("Select * from ChiTietTinTuyenDung");
         if (data1.getCount() == 0){
             database.QueryData("INSERT INTO ChiTietTinTuyenDung" +
-                    " VALUES(null,1,"+R.drawable.cham_soc_khach_hang+",'Nhân viên chăm sóc khách hàng tại Quận 3','Công ty A','27/2/2022','6 - 20 triệu vnd/tháng','20 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Đà Nẵng')");
+                    " VALUES(null,1,"+R.drawable.cham_soc_khach_hang+",'Nhân viên chăm sóc khách hàng tại Quận 3','Công ty A','27/2/2022','6 - 20 triệu vnd/tháng','20 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Đà Nẵng')," +
+                    "(null,2,"+R.drawable.nv_ban_hang+",'Nhân viên bán hàng tại siêu thị Go tại Đà Nẵng','B Group','30/7/2022','5 - 10 triệu vnd/tháng','25 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Đằ nẵng')," +
+                    "(null,3,"+R.drawable.tai_xe_o_to+",'Tài xế tại khách sạn Hoàng Anh Gia Lai','Nguyễn C','30/7/2022','11 - 15 triệu vnd/tháng','10 người','bán thời gian',null,'Không yêu cầu','Không yêu cầu','Đằ nẵng')," +
+                    "(null,4,"+R.drawable.cong_nhan_may+",'Công nhân may vá cho danh nghiệp','Công ty X','30/7/2022','40 - 50 triệu vnd/tháng','100 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Hồ Chí Minh')," +
+                    "(null,5,"+R.drawable.bao_ve+",'Bảo vệ tại công ty Sun','Công ty Sun','30/7/2022','4 - 7 triệu vnd/tháng','5 người','bán thời gian',null,'Không yêu cầu','Không yêu cầu','Hà Nội')," +
+                    "(null,6,"+R.drawable.cong_nhan+",'Công nhân nhà máy thủy điện Hòa Bình','Nhà máy thủy điện HB','30/7/2022','20 - 50 triệu vnd/tháng','75 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Tp.Hòa Bình')," +
+                    "(null,7,"+R.drawable.nv_phuc_vu+",'Nhân viên phục vụ tại nhà hàng Ngon','Nhà hàng Ngon','30/7/2022','7 - 12 triệu vnd/tháng','12 người','toàn thời gian',null,'Không yêu cầu','Không yêu cầu','Cà Mau')");
         };
 
         //database.QueryData("delete from TinTuyenDung");
