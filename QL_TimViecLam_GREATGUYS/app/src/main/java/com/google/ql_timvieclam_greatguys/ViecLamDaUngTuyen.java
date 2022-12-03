@@ -86,7 +86,7 @@ public class ViecLamDaUngTuyen extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CkLogin.getIdTinTuyenDung(ViecLamDaUngTuyen.this,i);
+                CkLogin.getIdTTD(ViecLamDaUngTuyen.this, i, "ViecLamDaUngtuyen");
                 Intent intent = new Intent(ViecLamDaUngTuyen.this,ChiTietTinTuyenDung.class);
                 startActivity(intent);
             }

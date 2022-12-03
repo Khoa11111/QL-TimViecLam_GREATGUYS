@@ -69,6 +69,26 @@ public class CkLogin {
         }
     }
 
+    public static boolean getIdTTD(Context context, int i, String table){
+        try{
+            Database database = new Database(context,"QLTimViecLam",null,1);
+            int count, maxCount;
+            maxCount = getCount(context, table);
+            if(i + 1 > maxCount)
+                count = maxCount;
+            else
+                count = i + 1;
+            Cursor data = database.GetData("select * from " + table + " limit "+ count );
+            data.moveToLast();
+            int idT = data.getInt(1);
+            CkLogin.id = idT;
+            data.isLast();
+            return true;
+        } catch (Exception e) {
+            Toast.makeText(context,"Lỗi set id",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
     public static boolean getIdTinTuyenDung(Context context, int i,int idTTD){
         try{
             Database database = new Database(context,"QLTimViecLam",null,1);

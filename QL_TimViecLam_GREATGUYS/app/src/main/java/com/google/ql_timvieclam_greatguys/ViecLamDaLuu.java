@@ -91,7 +91,7 @@ public class ViecLamDaLuu extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!CkLong()){
-                    CkLogin.getIdTinTuyenDung(ViecLamDaLuu.this,i);
+                    CkLogin.getIdTTD(ViecLamDaLuu.this, i, "ViecLamDaLuu");
                     Intent intent = new Intent(ViecLamDaLuu.this,ChiTietTinTuyenDung.class);
                     startActivity(intent);
                 }
