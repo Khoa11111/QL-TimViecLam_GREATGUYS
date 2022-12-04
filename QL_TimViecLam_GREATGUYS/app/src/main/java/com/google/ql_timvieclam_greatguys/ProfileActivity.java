@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView arrback_main;
     private ImageButton edit_profile_button;
     private TextView tvCountCv,tvUsername, tvName, tvDoB, tvPhone, tvEmail, tvAddress;
-    private Button btExpandApplyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
         tvPhone = (TextView) findViewById(R.id.tv_accPhone);
         tvEmail = (TextView) findViewById(R.id.tv_accEmail);
         tvAddress = (TextView) findViewById(R.id.tv_accAddress);
-        btExpandApplyList = (Button) findViewById(R.id.bt_expandApplyList);
     }
 
     private void BatSuKien(){
         onClickBack();
         onClickBtnEdit();
-        onClickBtnExpandApplyList();
     }
 
     private void onClickBack(){
@@ -65,16 +61,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent editProfile = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 startActivity(editProfile);
-            }
-        });
-    }
-
-    private void onClickBtnExpandApplyList(){
-        btExpandApplyList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent expandApplyList = new Intent(ProfileActivity.this, ViecLamDaUngTuyen.class);
-                startActivity(expandApplyList);
             }
         });
     }
@@ -99,8 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         data = database.GetData("Select count(id) " +
-                "From HoSoCV " +
-                "Where accEmail = '"+CkLogin.ckLogin+"'");
+                "From ViecLamDaUngtuyen");
 
         while (data.moveToNext()){
             String txt_countCV = data.getString(0);
